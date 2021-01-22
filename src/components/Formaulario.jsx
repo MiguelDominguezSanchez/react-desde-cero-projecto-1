@@ -3,6 +3,7 @@ import React from 'react';
 const Formaulario = () => {
 	const [fruta, setFruta] = React.useState('');
 	const [descripcion, setDescripcion] = React.useState('');
+	const [lista, setLista] = React.useState([]);
 
 	const guardarDatos = (e) => {
 		e.preventDefault();
@@ -17,6 +18,11 @@ const Formaulario = () => {
 			return;
 		}
 		console.log('procesando datos...' + fruta + descripcion);
+
+		setLista([
+			...lista,
+			{ nombreFruta: fruta, nombreDescripcion: descripcion },
+		]);
 
 		e.target.reset();
 		setFruta('');
@@ -43,6 +49,13 @@ const Formaulario = () => {
 					Agregar
 				</button>
 			</form>
+			<ul>
+				{lista.map((item, index) => (
+					<li key={index}>
+						{item.nombreFruta} - {item.nombreDescripcion}
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 };
