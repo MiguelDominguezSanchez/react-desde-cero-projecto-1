@@ -2,12 +2,31 @@ import React from 'react';
 
 const Formaulario = () => {
 	const [fruta, setFruta] = React.useState('');
-	const [Descripcion, setDescripcion] = React.useState('');
+	const [descripcion, setDescripcion] = React.useState('');
+
+	const guardarDatos = (e) => {
+		e.preventDefault();
+
+		if (!fruta.trim()) {
+			console.log('esta vacio fruta');
+			return;
+		}
+
+		if (!descripcion.trim()) {
+			console.log('esta vacio descripcion');
+			return;
+		}
+		console.log('procesando datos...' + fruta + descripcion);
+
+		e.target.reset();
+		setFruta('');
+		setDescripcion('');
+	};
 
 	return (
 		<div>
 			<h2>Formulario</h2>
-			<form>
+			<form onSubmit={guardarDatos}>
 				<input
 					type="text"
 					placeholder="Ingrese Fruta"
@@ -20,7 +39,9 @@ const Formaulario = () => {
 					className="form-control mb-2"
 					onChange={(e) => setDescripcion(e.target.value)}
 				/>
-				<button className="btn btn-primary w-100">Agregar</button>
+				<button className="btn btn-primary w-100" type="submit">
+					Agregar
+				</button>
 			</form>
 		</div>
 	);
